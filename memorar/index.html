@@ -7,63 +7,27 @@
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-  <style>
-    /* Styling untuk ikon VR kustom */
-    .clickable {
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
-  <a-scene 
+  <a-scene
     mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/band.mind;"
-    color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights"
-    vr-mode-ui="enabled: false" 
-    device-orientation-permission-ui="enabled: false">
-    
-    <!-- Ikon VR Kustom -->
+    color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: true"
+    device-orientation-permission-ui="enabled: true">
     <a-assets>
-      <img id="custom-vr-icon" src="https://via.placeholder.com/256" alt="Custom VR Icon"> <!-- Ganti dengan ikon Anda -->
+      <a-asset-item id="bearModel"
+        src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/bear/scene.gltf"></a-asset-item>
+      <a-asset-item id="raccoonModel"
+        src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/raccoon/scene.gltf"></a-asset-item>
     </a-assets>
-
-    <!-- Gambar 2D sebagai ikon VR untuk memasuki VR -->
-    <a-plane id="custom-vr-icon-plane"
-             position="0 1 -3" 
-             width="1" 
-             height="0.5"
-             src="#custom-vr-icon" 
-             class="clickable">
-    </a-plane>
-
-    <!-- Kamera yang mengikuti pergerakan -->
-    <a-camera position="0 1.6 0" look-controls="enabled: false"></a-camera>
-
-    <!-- Model 3D yang ditampilkan saat target dikenali -->
+  
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+  
     <a-entity mindar-image-target="targetIndex: 0">
-      <a-gltf-model rotation="0 0 0" position="0 -0.25 0" scale="0.05 0.05 0.05" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/raccoon/scene.gltf" animation-mixer></a-gltf-model>
+      <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
     </a-entity>
-
     <a-entity mindar-image-target="targetIndex: 1">
-      <a-gltf-model rotation="0 0 0" position="0 -0.25 0" scale="0.05 0.05 0.05" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/bear/scene.gltf" animation-mixer></a-gltf-model>
+      <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
     </a-entity>
-
-    <!-- Kursor VR -->
-    <a-cursor 
-        id="cursor" 
-        color="#FFF" 
-        raycaster="objects: .clickable" 
-        animation__click="property: scale; to: 1.5 1.5 1.5; dur: 150; startEvents: click" 
-        animation__cursor="property: scale; to: 1 1 1; dur: 150; startEvents: mouseenter">
-    </a-cursor>
-
   </a-scene>
-
-  <script>
-    // Event listener untuk ikon VR kustom
-    document.querySelector('#custom-vr-icon-plane').addEventListener('click', function() {
-      const scene = document.querySelector('a-scene');
-      scene.enterVR();  // Memasuki mode VR saat ikon diklik
-    });
-  </script>
 </body>
 </html>
