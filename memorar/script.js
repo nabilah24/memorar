@@ -16,12 +16,14 @@ videoEntities.forEach(videoEntity => {
 });
 
 const raccoonVideo = document.getElementById("raccoonModel");
+const raccoonAudio = document.getElementById("raccoonAudio");
 const bearVideo = document.getElementById("bearModel");
 const bearAudio = document.getElementById("bearAudio");
 
 // Tambahkan event listener pada touch untuk memulai video jika belum
 document.body.addEventListener('click', () => {
   if (raccoonVideo.paused) raccoonVideo.play();
+  raccoonAudio.pause();
   if (bearVideo.paused) bearVideo.play();
   bearAudio.pause();
 });
@@ -29,11 +31,14 @@ document.body.addEventListener('click', () => {
 // Event listener MindAR untuk kontrol target
 document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListener("targetFound", () => {
   raccoonVideo.play();
+  raccoonAudio.play();
 });
 
 document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListener("targetLost", () => {
   raccoonVideo.pause();
   raccoonVideo.currentTime = 0;
+  raccoonAudio.pause();
+  raccoonAudio.currentTime = 0;
 });
 
 document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetFound", () => {
