@@ -8,7 +8,6 @@
     AFRAME.registerComponent('videohandler', {
       init: function () {
         var marker = this.el;
-
         this.vid = document.querySelector("#vid");
 
         marker.addEventListener('markerFound', function () {
@@ -21,8 +20,18 @@
         }.bind(this));
       }
     });
+
+    // Menyembunyikan loading screen setelah AR.js selesai dimuat
+    var scene = document.querySelector('a-scene');
+    scene.addEventListener('loaded', function () {
+      var loader = document.querySelector('.arjs-loader');
+      if (loader) {
+        loader.style.display = 'none';  // Sembunyikan elemen loading
+      }
+    });
   };
 </script>
+
 
 <style>
   .arjs-loader {
