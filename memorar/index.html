@@ -8,25 +8,27 @@
 </head>
 
 <body>
-  <a-scene mindar-image="imageTargetSrc: assets/target/targets.mind;" color-space="sRGB"
-    renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+  <a-scene
+    mindar-image="imageTargetSrc: assets/target/targets.mind;"
+    color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false">
-  
+
     <a-assets>
-      <video id="vid1" src="assets/video/video1.mp4" preload="auto" crossorigin="anonymous" playsinline muted></video>
-      <audio id="vid1Audio" src="assets/audio/audio1.mp3" preload="auto"></audio>
-      <video id="vid2" src="assets/video/video2.mp4" preload="auto" crossorigin="anonymous" playsinline muted></video>
-      <audio id="vid2Audio" src="assets/audio/audio2.mp3" preload="auto"></audio>
+      <video id="bearModel" src="assets/video/video-1.mp4" preload="auto" crossorigin="anonymous" playsinline
+        muted></video>
+      <audio id="bearAudio" src="assets/audio/video-1.mp3" preload="auto"></audio>
+      <video id="raccoonModel" src="assets/video/mov_bbb.mp4" preload="auto" crossorigin="anonymous" playsinline
+        muted></video>
     </a-assets>
-  
+
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-  
+
     <a-entity mindar-image-target="targetIndex: 0">
-      <a-video rotation="0 0 0" position="0 -0.40 0" scale="0.5 0.5 0.5" src="#vid2"></a-video>
+      <a-video rotation="0 0 0" position="0 -0.40 0" scale="0.5 0.5 0.5" src="#raccoonModel"></a-video>
     </a-entity>
-  
+
     <a-entity mindar-image-target="targetIndex: 1">
-      <a-video rotation="0 0 0" position="0 -0.40 0" scale="0.5 0.5 0.5" src="#vid1"></a-video>
+      <a-video rotation="0 0 0" position="0 -0.40 0" scale="0.5 0.5 0.5" src="#bearModel"></a-video>
     </a-entity>
   </a-scene>
 
