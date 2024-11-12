@@ -33,18 +33,33 @@
   </a-scene>
 
   <script>
+    // Fungsi untuk memutar dan menghentikan video/audio terkait
+    function handleMediaPlayPause(videoElement, audioElement) {
+      if (videoElement.paused) {
+        videoElement.play();
+        if (audioElement && audioElement.paused) audioElement.play(); // Mainkan audio jika ada dan belum diputar
+      } else {
+        videoElement.pause();
+        videoElement.currentTime = 0;
+        if (audioElement) {
+          audioElement.pause();
+          audioElement.currentTime = 0;
+        }
+      }
+    }
+
     // Pilih semua elemen a-video dan audio dalam scene
     const videoEntities = document.querySelectorAll("a-video");
     const audioEntities = document.querySelectorAll("audio");
 
-    // Tambahkan event listener pada touch untuk memulai video jika belum
+    // Tambahkan event listener pada touch untuk memulai video dan audio jika belum
     document.body.addEventListener('click', () => {
-      videoEntities.forEach(video => {
-        if (video.paused) video.play();
-      });
+      videoEntities.forEach((videoEntity, index) => {
+        const videoSrc = videoEntity.getAttribute('src');
+        const videoElement = document.querySelector(videoSrc); // Ambil elemen video berdasarkan src
+        const audioElement = document.querySelector(`#${videoElement.id}Audio`); // Ambil audio yang terkait dengan ID yang sama
 
-      audioEntities.forEach(audio => {
-        audio.pause();
+        handleMediaPlayPause(videoElement, audioElement);
       });
     });
 
@@ -52,13 +67,12 @@
     videoEntities.forEach((videoEntity, index) => {
       const videoSrc = videoEntity.getAttribute('src');
       const videoElement = document.querySelector(videoSrc); // Ambil elemen video berdasarkan src
-
-      const audioElement = document.querySelector(`#${videoElement.id}Audio`); // Ambil audio yang terkait (misalnya dengan ID yang sama)
+      const audioElement = document.querySelector(`#${videoElement.id}Audio`); // Ambil audio yang terkait dengan ID yang sama
 
       // Event listener untuk targetFound dan targetLost
       document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`).addEventListener("targetFound", () => {
         videoElement.play();
-        if (audioElement) audioElement.play(); // Mainkan audio jika ada
+        if (audioElement && audioElement.paused) audioElement.play(); // Mainkan audio jika ada dan belum diputar
       });
 
       document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`).addEventListener("targetLost", () => {
