@@ -13,10 +13,10 @@
     color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false">
     <a-assets>
-      <a-asset-item id="bearModel"
-        src="assets/video/video-1.mp4"></a-asset-item>
-      <a-asset-item id="raccoonModel"
-        src="assets/video/mov_bbb.mp4"></a-asset-item>
+      <video id="bearModel"
+        src="assets/video/video-1.mp4" preload="auto" crossorigin="anonymous"></video>
+      <video id="raccoonModel"
+        src="assets/video/mov_bbb.mp4" preload="auto" crossorigin="anonymous"></video>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -28,35 +28,7 @@
       <a-video rotation="0 0 0 " position="0 -0.25 0" scale="0.5 0.5 0.5" src="#bearModel">
     </a-entity>
   </a-scene>
-
-  <script>
-    // Mendapatkan elemen video A-Frame
-    const raccoonVideoEntity = document.querySelector("#raccoonVideo");
-    const bearVideoEntity = document.querySelector("#bearVideo");
-
-    // Mengaktifkan event pada mindar-image-target
-    raccoonVideoEntity.addEventListener("targetFound", () => {
-      const raccoonVideo = raccoonVideoEntity.getObject3D('mesh').material.map.image;
-      raccoonVideo.play();
-    });
-
-    raccoonVideoEntity.addEventListener("targetLost", () => {
-      const raccoonVideo = raccoonVideoEntity.getObject3D('mesh').material.map.image;
-      raccoonVideo.pause();
-      raccoonVideo.currentTime = 0;  // Reset ke awal
-    });
-
-    bearVideoEntity.addEventListener("targetFound", () => {
-      const bearVideo = bearVideoEntity.getObject3D('mesh').material.map.image;
-      bearVideo.play();
-    });
-
-    bearVideoEntity.addEventListener("targetLost", () => {
-      const bearVideo = bearVideoEntity.getObject3D('mesh').material.map.image;
-      bearVideo.pause();
-      bearVideo.currentTime = 0;  // Reset ke awal
-    });
-  </script>
+  
 </body>
 
 </html>
