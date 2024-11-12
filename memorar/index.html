@@ -15,6 +15,7 @@
 
     <a-assets>
       <video id="bearModel" src="assets/video/video-1.mp4" preload="auto" crossorigin="anonymous" playsinline></video>
+      <audio id="bearAudio" src="assets/audio/video-1.mp3" preload="auto"></audio>
       <video id="raccoonModel" src="assets/video/mov_bbb.mp4" preload="auto" crossorigin="anonymous" playsinline></video>
     </a-assets>
 
@@ -32,11 +33,13 @@
   <script>
     const raccoonVideo = document.getElementById("raccoonModel");
     const bearVideo = document.getElementById("bearModel");
+    const bearAudio = document.getElementById("bearAudio");
 
     // Tambahkan event listener pada touch untuk memulai video jika belum
     document.body.addEventListener('click', () => {
       if (raccoonVideo.paused) raccoonVideo.play();
       if (bearVideo.paused) bearVideo.play();
+      bearAudio.pause();
     });
 
     // Event listener MindAR untuk kontrol target
@@ -51,11 +54,14 @@
 
     document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetFound", () => {
       bearVideo.play();
+      bearAudio.play();
     });
 
     document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetLost", () => {
       bearVideo.pause();
       bearVideo.currentTime = 0;
+      bearAudio.pause();
+      bearAudio.currentTime = 0;
     });
   </script>
 </body>
