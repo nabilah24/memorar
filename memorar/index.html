@@ -12,36 +12,43 @@
     mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/band.mind;"
     color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false">
+
     <a-assets>
-      <video id="bearModel"
-        src="assets/video/video-1.mp4" preload="auto" crossorigin="anonymous" playsinline muted></video>
-      <video id="raccoonModel"
-        src="assets/video/mov_bbb.mp4" preload="auto" crossorigin="anonymous" playsinline muted></video>
+      <video id="bearModel" src="assets/video/video-1.mp4" preload="auto" crossorigin="anonymous" playsinline
+        muted></video>
+      <video id="raccoonModel" src="assets/video/mov_bbb.mp4" preload="auto" crossorigin="anonymous" playsinline
+        muted></video>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
     <a-entity mindar-image-target="targetIndex: 0">
-      <a-video rotation="0 0 0 " position="0 -0.25 0" scale="0.5 0.5 0.5" src="#raccoonModel">
+      <a-video rotation="0 0 0" position="0 -0.25 0" scale="0.5 0.5 0.5" src="#raccoonModel"></a-video>
     </a-entity>
+
     <a-entity mindar-image-target="targetIndex: 1">
-      <a-video rotation="0 0 0 " position="0 -0.25 0" scale="0.5 0.5 0.5" src="#bearModel">
+      <a-video rotation="0 0 0" position="0 -0.25 0" scale="0.5 0.5 0.5" src="#bearModel"></a-video>
     </a-entity>
   </a-scene>
-  
+
   <script>
-    // Mendapatkan elemen video HTML untuk kontrol manual
     const raccoonVideo = document.getElementById("raccoonModel");
     const bearVideo = document.getElementById("bearModel");
 
-    // Menjalankan event listener untuk kontrol target
+    // Tambahkan event listener pada touch untuk memulai video jika belum
+    document.body.addEventListener('click', () => {
+      if (raccoonVideo.paused) raccoonVideo.play();
+      if (bearVideo.paused) bearVideo.play();
+    });
+
+    // Event listener MindAR untuk kontrol target
     document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListener("targetFound", () => {
       raccoonVideo.play();
     });
 
     document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListener("targetLost", () => {
       raccoonVideo.pause();
-      raccoonVideo.currentTime = 0; // Reset ke awal
+      raccoonVideo.currentTime = 0;
     });
 
     document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetFound", () => {
@@ -50,7 +57,7 @@
 
     document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetLost", () => {
       bearVideo.pause();
-      bearVideo.currentTime = 0; // Reset ke awal
+      bearVideo.currentTime = 0;
     });
   </script>
 </body>
