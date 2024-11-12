@@ -28,23 +28,6 @@
       <a-video rotation="0 0 0 " position="0 -0.25 0" scale="0.5 0.5 0.5" src="#videoTarget" animation-mixer>
     </a-entity>
   </a-scene>
-
-  <script>
-    // Mendapatkan referensi video dan target entitas
-    const video = document.querySelector('#bearModel');
-    const videoTarget = document.querySelector('#videoTarget');
-
-    // Memulai video saat target ditemukan
-    videoTarget.addEventListener('targetFound', () => {
-      video.play();
-    });
-
-    // Menghentikan video saat target hilang
-    videoTarget.addEventListener('targetLost', () => {
-      video.pause();
-      video.currentTime = 0; // Mengatur ulang ke awal
-    });
-  </script>
 </body>
 
 </html>
