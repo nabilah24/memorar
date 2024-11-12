@@ -1,33 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MemorAR</title>
-  <link rel="icon" href="/src/assets/logo/memorar.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 </head>
+
 <body>
+  <!-- Teks atau tombol instruksi yang meminta pengguna untuk memulai video -->
+  <div id="startButton"
+    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.5); color: white; padding: 10px; cursor: pointer;">
+    Sentuh layar untuk memulai video
+  </div>
+
   <a-scene
     mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/band.mind;"
-    color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights"
+    color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false">
     <a-assets>
-      <video id="bearModel" src="assets/video/video-1.mp4" autoplay loop="true" muted></video>
-      <a-asset-item id="raccoonModel"
-        src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/raccoon/scene.gltf"></a-asset-item>
+      <!-- Video dengan suara -->
+      <video id="video1" src="assets/video/video-1.mp4" loop playsinline></video>
     </a-assets>
-  
+
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-  
+
     <a-entity mindar-image-target="targetIndex: 0">
-      <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
-    </a-entity>
-    <a-entity mindar-image-target="targetIndex: 1">
-<a-video src="#bearModel" rotation="0 0 0" position="0 0 0" scale="1 0.5 1"></a-video>
+      <a-video id="videoEntity1" src="#video1" rotation="0 0 0" position="0 0 0" scale="1 0.5 1"></a-video>
     </a-entity>
   </a-scene>
+
+  <script>
+    // Fungsi untuk memulai video dengan suara setelah interaksi pengguna
+    const startButton = document.getElementById("startButton");
+    const video = document.getElementById("video1");
+
+    startButton.addEventListener("click", () => {
+      video.play(); // Memulai video dengan suara setelah pengguna menyentuh layar
+      startButton.style.display = "none"; // Menghilangkan tombol setelah video dimulai
+    });
+
+    // Event Listener untuk memastikan video mulai diputar saat target gambar dikenali
+    document.querySelector('a-scene').addEventListener('targetFound', () => {
+      if (video.paused) {
+        video.play();
+      }
+    });
+  </script>
 </body>
+
 </html>
