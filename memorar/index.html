@@ -33,59 +33,10 @@
   </a-scene>
 
   <script>
-    // Fungsi untuk memutar dan menghentikan video/audio terkait
-    function handleMediaPlayPause(videoElement, audioElement) {
-      if (videoElement.paused) {
-        videoElement.play();
-        if (audioElement && audioElement.paused) audioElement.play(); // Mainkan audio jika ada dan belum diputar
-      } else {
-        videoElement.pause();
-        videoElement.currentTime = 0;
-        if (audioElement) {
-          audioElement.pause();
-          audioElement.currentTime = 0;
-        }
-      }
-    }
-
-    // Pilih semua elemen a-video dan audio dalam scene
+    // Pilih semua elemen a-video dalam scene
     const videoEntities = document.querySelectorAll("a-video");
-    const audioEntities = document.querySelectorAll("audio");
 
-    // Tambahkan event listener pada touch untuk memulai video dan audio jika belum
-    document.body.addEventListener('click', () => {
-      videoEntities.forEach((videoEntity, index) => {
-        const videoSrc = videoEntity.getAttribute('src');
-        const videoElement = document.querySelector(videoSrc); // Ambil elemen video berdasarkan src
-        const audioElement = document.querySelector(`#${videoElement.id}Audio`); // Ambil audio yang terkait dengan ID yang sama
-
-        handleMediaPlayPause(videoElement, audioElement);
-      });
-    });
-
-    // Event listener MindAR untuk kontrol target
-    videoEntities.forEach((videoEntity, index) => {
-      const videoSrc = videoEntity.getAttribute('src');
-      const videoElement = document.querySelector(videoSrc); // Ambil elemen video berdasarkan src
-      const audioElement = document.querySelector(`#${videoElement.id}Audio`); // Ambil audio yang terkait dengan ID yang sama
-
-      // Event listener untuk targetFound dan targetLost
-      document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`).addEventListener("targetFound", () => {
-        videoElement.play();
-        if (audioElement && audioElement.paused) audioElement.play(); // Mainkan audio jika ada dan belum diputar
-      });
-
-      document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`).addEventListener("targetLost", () => {
-        videoElement.pause();
-        videoElement.currentTime = 0;
-        if (audioElement) {
-          audioElement.pause();
-          audioElement.currentTime = 0;
-        }
-      });
-    });
-
-    // Menyesuaikan skala video berdasarkan rasio aspek
+    // Loop melalui setiap elemen video
     videoEntities.forEach(videoEntity => {
       const videoSrc = videoEntity.getAttribute('src');
       const videoElement = document.querySelector(videoSrc); // Ambil elemen video berdasarkan src
@@ -97,6 +48,39 @@
         // Atur skala berdasarkan rasio aspek
         videoEntity.setAttribute("scale", `${videoAspectRatio} 1 1`);
       };
+    });
+
+    const raccoonVideo = document.getElementById("raccoonModel");
+    const bearVideo = document.getElementById("bearModel");
+    const bearAudio = document.getElementById("bearAudio");
+
+    // Tambahkan event listener pada touch untuk memulai video jika belum
+    document.body.addEventListener('click', () => {
+      if (raccoonVideo.paused) raccoonVideo.play();
+      if (bearVideo.paused) bearVideo.play();
+      bearAudio.pause();
+    });
+
+    // Event listener MindAR untuk kontrol target
+    document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListener("targetFound", () => {
+      raccoonVideo.play();
+    });
+
+    document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListener("targetLost", () => {
+      raccoonVideo.pause();
+      raccoonVideo.currentTime = 0;
+    });
+
+    document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetFound", () => {
+      bearVideo.play();
+      bearAudio.play();
+    });
+
+    document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetLost", () => {
+      bearVideo.pause();
+      bearVideo.currentTime = 0;
+      bearAudio.pause();
+      bearAudio.currentTime = 0;
     });
   </script>
 </body>
