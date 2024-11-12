@@ -14,9 +14,11 @@
     device-orientation-permission-ui="enabled: false">
 
     <a-assets>
-      <video id="bearModel" src="assets/video/video-1.mp4" preload="auto" crossorigin="anonymous" playsinline></video>
+      <video id="bearModel" src="assets/video/video-1.mp4" preload="auto" crossorigin="anonymous" playsinline
+        muted></video>
       <audio id="bearAudio" src="assets/audio/video-1.mp3" preload="auto"></audio>
-      <video id="raccoonModel" src="assets/video/mov_bbb.mp4" preload="auto" crossorigin="anonymous" playsinline></video>
+      <video id="raccoonModel" src="assets/video/mov_bbb.mp4" preload="auto" crossorigin="anonymous" playsinline
+        muted></video>
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -31,6 +33,23 @@
   </a-scene>
 
   <script>
+    // Pilih semua elemen a-video dalam scene
+    const videoEntities = document.querySelectorAll("a-video");
+
+    // Loop melalui setiap elemen video
+    videoEntities.forEach(videoEntity => {
+      const videoSrc = videoEntity.getAttribute('src');
+      const videoElement = document.querySelector(videoSrc); // Ambil elemen video berdasarkan src
+
+      // Tunggu video untuk memuat, lalu hitung rasio aspek dan sesuaikan skala
+      videoElement.onloadedmetadata = () => {
+        const videoAspectRatio = videoElement.videoWidth / videoElement.videoHeight;
+
+        // Atur skala berdasarkan rasio aspek
+        videoEntity.setAttribute("scale", `${videoAspectRatio} 1 1`);
+      };
+    });
+
     const raccoonVideo = document.getElementById("raccoonModel");
     const bearVideo = document.getElementById("bearModel");
     const bearAudio = document.getElementById("bearAudio");
