@@ -19,6 +19,10 @@ const raccoonVideo = document.getElementById("raccoonModel");
 const raccoonAudio = document.getElementById("raccoonAudio");
 const bearVideo = document.getElementById("bearModel");
 const bearAudio = document.getElementById("bearAudio");
+const catVideo = document.getElementById("catModel");
+const catAudio = document.getElementById("catAudio");
+const dogVideo = document.getElementById("dogModel");
+const dogAudio = document.getElementById("dogAudio");
 
 // Tambahkan event listener pada touch untuk memulai video jika belum
 document.body.addEventListener('click', () => {
@@ -26,9 +30,13 @@ document.body.addEventListener('click', () => {
   raccoonAudio.pause();
   if (bearVideo.paused) bearVideo.play();
   bearAudio.pause();
+  if (catVideo.paused) catVideo.play();
+  catAudio.pause();
+  if (dogVideo.paused) dogVideo.play();
+  dogAudio.pause();
 });
 
-// Event listener MindAR untuk kontrol target
+// Event listener MindAR untuk kontrol target Raccoon
 document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListener("targetFound", () => {
   raccoonVideo.play();
   raccoonAudio.play();
@@ -41,6 +49,7 @@ document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListene
   raccoonAudio.currentTime = 0;
 });
 
+// Event listener MindAR untuk kontrol target Bear
 document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetFound", () => {
   bearVideo.play();
   bearAudio.play();
@@ -51,4 +60,30 @@ document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListene
   bearVideo.currentTime = 0;
   bearAudio.pause();
   bearAudio.currentTime = 0;
+});
+
+// Event listener MindAR untuk kontrol target Dog
+document.querySelector('[mindar-image-target="targetIndex: 2"]').addEventListener("targetFound", () => {
+  dogVideo.play();
+  dogAudio.play();
+});
+
+document.querySelector('[mindar-image-target="targetIndex: 2"]').addEventListener("targetLost", () => {
+  dogVideo.pause();
+  dogVideo.currentTime = 0;
+  dogAudio.pause();
+  dogAudio.currentTime = 0;
+});
+
+// Event listener MindAR untuk kontrol target Cat
+document.querySelector('[mindar-image-target="targetIndex: 3"]').addEventListener("targetFound", () => {
+  catVideo.play();
+  catAudio.play();
+});
+
+document.querySelector('[mindar-image-target="targetIndex: 3"]').addEventListener("targetLost", () => {
+  catVideo.pause();
+  catVideo.currentTime = 0;
+  catAudio.pause();
+  catAudio.currentTime = 0;
 });
