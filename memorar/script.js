@@ -37,12 +37,12 @@ document.body.addEventListener('click', () => {
 });
 
 // Event listener MindAR untuk kontrol target Raccoon
-document.querySelector('[mindar-image-target="targetIndex: 2"]').addEventListener("targetFound", () => {
+document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListener("targetFound", () => {
   raccoonVideo.play();
   raccoonAudio.play();
 });
 
-document.querySelector('[mindar-image-target="targetIndex: 2"]').addEventListener("targetLost", () => {
+document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListener("targetLost", () => {
   raccoonVideo.pause();
   raccoonVideo.currentTime = 0;
   raccoonAudio.pause();
@@ -50,12 +50,12 @@ document.querySelector('[mindar-image-target="targetIndex: 2"]').addEventListene
 });
 
 // Event listener MindAR untuk kontrol target Bear
-document.querySelector('[mindar-image-target="targetIndex: 3"]').addEventListener("targetFound", () => {
+document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetFound", () => {
   bearVideo.play();
   bearAudio.play();
 });
 
-document.querySelector('[mindar-image-target="targetIndex: 3"]').addEventListener("targetLost", () => {
+document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetLost", () => {
   bearVideo.pause();
   bearVideo.currentTime = 0;
   bearAudio.pause();
@@ -63,12 +63,12 @@ document.querySelector('[mindar-image-target="targetIndex: 3"]').addEventListene
 });
 
 // Event listener MindAR untuk kontrol target Cat
-document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetFound", () => {
+document.querySelector('[mindar-image-target="targetIndex: 2"]').addEventListener("targetFound", () => {
   catVideo.play();
   catAudio.play();
 });
 
-document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListener("targetLost", () => {
+document.querySelector('[mindar-image-target="targetIndex: 2"]').addEventListener("targetLost", () => {
   catVideo.pause();
   catVideo.currentTime = 0;
   catAudio.pause();
@@ -76,12 +76,12 @@ document.querySelector('[mindar-image-target="targetIndex: 1"]').addEventListene
 });
 
 // Event listener MindAR untuk kontrol target Dog
-document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListener("targetFound", () => {
+document.querySelector('[mindar-image-target="targetIndex: 3"]').addEventListener("targetFound", () => {
   dogVideo.play();
   dogAudio.play();
 });
 
-document.querySelector('[mindar-image-target="targetIndex: 0"]').addEventListener("targetLost", () => {
+document.querySelector('[mindar-image-target="targetIndex: 3"]').addEventListener("targetLost", () => {
   dogVideo.pause();
   dogVideo.currentTime = 0;
   dogAudio.pause();
