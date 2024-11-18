@@ -75,15 +75,15 @@ document.querySelector('[mindar-image-target="targetIndex: 2"]').addEventListene
   dogAudio.currentTime = 0;
 });
 
-// // Event listener MindAR untuk kontrol target Cat
-// document.querySelector('[mindar-image-target="targetIndex: 3"]').addEventListener("targetFound", () => {
-//   catVideo.play();
-//   catAudio.play();
-// });
+// Event listener MindAR untuk kontrol target Cat
+document.querySelector('[mindar-image-target="targetIndex: 3"]').addEventListener("targetFound", () => {
+  catVideo.play();
+  catAudio.play();
+});
 
-// document.querySelector('[mindar-image-target="targetIndex: 3"]').addEventListener("targetLost", () => {
-//   catVideo.pause();
-//   catVideo.currentTime = 0;
-//   catAudio.pause();
-//   catAudio.currentTime = 0;
-// });
+document.querySelector('[mindar-image-target="targetIndex: 3"]').addEventListener("targetLost", () => {
+  catVideo.pause();
+  catVideo.currentTime = 0;
+  catAudio.pause();
+  catAudio.currentTime = 0;
+});
