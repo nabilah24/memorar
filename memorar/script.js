@@ -15,7 +15,7 @@ videoEntities.forEach(videoEntity => {
       videoEntity.setAttribute("scale", `1 ${1 / videoAspectRatio} 1`);
     } else {
       // Video Portrait: Tinggi lebih besar dari lebar
-      videoEntity.setAttribute("scale", `${videoAspectRatio} 1 1`);
+      videoEntity.setAttribute("scale", `${videoAspectRatio} 2 2`);
     }
   };
 });
