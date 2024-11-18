@@ -10,13 +10,8 @@ videoEntities.forEach(videoEntity => {
   videoElement.onloadedmetadata = () => {
     const videoAspectRatio = videoElement.videoWidth / videoElement.videoHeight;
 
-    if (videoAspectRatio > 1) {
-      // Video Landscape: Lebar lebih besar dari tinggi
-      videoEntity.setAttribute("scale", `1 ${1 / videoAspectRatio} 1`);
-    } else {
-      // Video Portrait: Tinggi lebih besar dari lebar
-      videoEntity.setAttribute("scale", `${videoAspectRatio} 2 2`);
-    }
+    // Atur skala berdasarkan rasio aspek
+    videoEntity.setAttribute("scale", `${videoAspectRatio} 1 1`);
   };
 });
 
